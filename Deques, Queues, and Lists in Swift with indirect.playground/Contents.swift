@@ -2,7 +2,8 @@ func transpose<T>(mat: List<List<T>>) -> List<List<T>> {
   switch mat {
   case let .Cons(x, xs) where x.isEmpty: return transpose(xs)
   case let .Cons(.Cons(x, xs), xss):
-    return (x |> xss.flatMap{$0.first}) |> transpose(xs |> xss.map{$0.tail})
+    return (x |> xss.flatMap{$0.first}) |>
+      transpose(xs |> xss.map{$0.tail})
   default: return .Nil
   }
 }
@@ -14,7 +15,11 @@ extension List {
   func foldr<T>(initial: T, @noescape combine: (element: Element, accumulator: T) -> T) -> T {
     switch self {
     case .Nil: return initial
-    case let .Cons(x, xs): return combine(element: x, accumulator: xs.foldr(initial, combine: combine))
+    case let .Cons(x, xs):
+      return combine(
+        element: x,
+        accumulator: xs.foldr(initial, combine: combine)
+      )
     }
   }
 }
@@ -28,7 +33,9 @@ extension List {
     switch self {
     case .Nil: return .Nil
     case let .Cons(x, xs):
-      return [x] |> xs.subsequences.foldr([]) { (ys, r) in ys |> (x |> ys) |> r }
+      return [x] |> xs.subsequences.foldr([]) {
+        (ys, r) in ys |> (x |> ys) |> r
+      }
     }
   }
 }
