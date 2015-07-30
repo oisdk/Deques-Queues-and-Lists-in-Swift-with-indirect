@@ -46,7 +46,6 @@ let deck: Deque = [1, 2, 3, 4, 5, 6]
 
 deck
   .filter { $0 % 2 == 0 }
-  .tail
 
 let a = deck.tail
 let b = a.tail
