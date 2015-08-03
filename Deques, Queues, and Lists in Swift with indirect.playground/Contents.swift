@@ -45,7 +45,7 @@ List([1, 2, 3]).subsequences
 let deck: Deque = [1, 2, 3, 4, 5, 6]
 
 deck
-  .filter { $0 % 2 == 0 }
+  .filter { $0 > 3 }
 
 let a = deck.tail
 let b = a.tail
